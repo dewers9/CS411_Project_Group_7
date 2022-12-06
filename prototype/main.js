@@ -16,14 +16,39 @@ function searchByIngredient(ingredients){
 
   //    Combine and format ingredients for api call
   ingredient_string = ingredients.join("%2C")
+  query_string = ingredients.join(" and ")
+  console.log("query string")
+  console.log(query_string)
   
-  let result_lim = '2'
+  let result_lim = '1'
   let ignorePantry = 'true'
   let rankings = '1'
+  
+  let diets = document.getElementsByName("diet_restriction")
+  restrictions = []
 
-  let url =  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=' + ingredient_string + '&number=' + result_lim + '&ignorePantry=' + ignorePantry + '&ranking=' + rankings
+  for(i in diets){
+    console.log(diets[i].value)
+    if(diets[i].checked){
+      restrictions.push(diets[i].value)
+    }
+  }
+
+  let restrictions_string = restrictions.join(",")
+  restrictions_string = restrictions_string.replace(' ','_')
+  console.log(restrictions_string)
+
+  // let url =  'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=' + ingredient_string + '&number=' + result_lim  + '&diet=' + restrictions_string + '&ignorePantry=' + ignorePantry + '&ranking=' + rankings
+  let url = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?query=' + query_string + '&includeIngredients=' + ingredient_string  + '&number=' + result_lim  + '&diet=' + restrictions_string
   console.log(url)
   
+  
+
+  console.log("restrictions")
+  console.log(restrictions)
+
+
+
   let x = get_promise(url)
   console.log(x)
   console.log(x.then((result) => set_results(result)))
