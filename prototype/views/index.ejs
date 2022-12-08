@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search For Food</title>
+  <link rel="stylesheet" href='/stylesheets/style.css'>
+</head>
+
+<button onclick="document.getElementById('id01').style.display='flex'" style="width:auto;">Login</button>
+
+<body>
+  <div id = "id01" class="container">
+    <span onclick="document.getElementById('id01').style.display='none'" 
+    class="close" title="Close">&times</span>
+    <div class="box box-one">
+      <h1>Login</h1>
+        <button>
+            <img src="https://img.icons8.com/color/48/null/google-logo.png" width="19">
+            <span>Sign in with Google</span>
+        </button>
+        <button>
+            <img src="https://img.icons8.com/color/50/000000/twitter--v1.png" width="19">
+            <span>Sign in with Twitter</span>
+        </button>
+    </div>
+    <h5>Or</h5>
+    <div class="box box-two">
+        <form>
+            <input type="text" placeholder="Phone, email, or username" name ="uname"/>
+        </form>
+        <form>
+            <input type="text" placeholder="Password" name ="pw"/>
+        </form>
+        <button type="submit">Login</button>
+        <button>Forget password</button>
+    </div>
+    <p>Don't have an account <a href="#">Sign Up</a></p>
+  </div>
+</body>
+
+
+<body style="font-family: arial;">
+  <h2>Input Ingredient</h2>
+  <input id="ingredients" value="apple, sugar"></input>
+  <button onclick="searchByIngredient(document.getElementById('ingredients').value)">Search</button>
+
+  <h2>Results</h2>
+  <ul id="results">
+    
+  </ul>
+</body>
+</html>
+<script src="app.js"></script>
