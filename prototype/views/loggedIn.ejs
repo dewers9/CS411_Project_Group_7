@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search For Food</title>
+  <link rel="stylesheet" href='/stylesheets/style.css'>
+</head>
+
+<p>Hello <%=user.displayName %> </p>
+
+
+<body style="font-family: arial;">
+  <h2>Input Ingredient</h2>
+  <input id="ingredients" value="apple, sugar"></input>
+  <button onclick="searchByIngredient(document.getElementById('ingredients').value)">Search</button>
+
+  <h2>Results</h2>
+  <ul id="results">
+    
+  </ul>
+</body>
+</html>
+<script src="app.js"></script>
