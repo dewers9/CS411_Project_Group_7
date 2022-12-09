@@ -1,4 +1,3 @@
-
 const options = {
 	method: 'GET',
 	headers: {
@@ -7,13 +6,23 @@ const options = {
 	}
 };
 
-const puppeteer = require('puppeteer');
+var history = []
+var n = 0
 
 function searchByIngredient(ingredients){
+  var ul = document.getElementById("results");
+  while( ul.firstChild ){
+    ul.removeChild( ul.firstChild );
+  }
+
   //    Parse Ingredients into list and trim whitespaces
   ingredients = ingredients.split(",")
   for(i in ingredients){
     ingredients[i] = ingredients[i].trim()
+
+    // Add to history
+    localStorage.setItem(n, ingredients[i]);
+    n = n + 1
   }
 
   //    Combine and format ingredients for api call
@@ -27,7 +36,6 @@ function searchByIngredient(ingredients){
   let rankings = '1'
   
   let diets = document.getElementsByName("diet_restriction")
-  
   restrictions = []
 
   for(i in diets){
@@ -45,8 +53,12 @@ function searchByIngredient(ingredients){
   let url = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?query=' + query_string + '&includeIngredients=' + ingredient_string  + '&number=' + result_lim  + '&diet=' + restrictions_string
   console.log(url)
   
+  
+
   console.log("restrictions")
   console.log(restrictions)
+
+
 
   let x = get_promise(url)
   console.log(x)
@@ -61,13 +73,48 @@ async function get_promise(url){
 }
 
 function set_results(new_val){
+  let temp
+  let res = document.getElementById('results')
 
-          let temp
-        let res = document.getElementById('results')
-        for(i in new_val){
-          temp = document.createElement("li")
-          temp.innerHTML = JSON.stringify(new_val[i])
-          res.appendChild(temp)
-        }  
+  for(i in new_val){
+    temp = document.createElement("li")
+    temp.innerHTML = JSON.stringify(new_val[i])
+    res.appendChild(temp)
+  }
+
+}
+
+function allStorage() {
+
+  var values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+  while ( i-- ) {
+      values.push( localStorage.getItem(keys[i]) );
+  }
+
+  return values;
+}
+
+function show_history(){
+  all_history = allStorage()
+  let uniqueHistory = [...new Set(all_history)];
+ 
+  var ul = document.getElementById('history');
+
+  for(i in uniqueHistory){
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(uniqueHistory[i]));
+  ul.appendChild(li);
+  }
+
+} 
   
+function clean_history(){
+  var ul = document.getElementById("history");
+  while( ul.firstChild ){
+    ul.removeChild( ul.firstChild );
+  }
+  localStorage.clear();
 }
