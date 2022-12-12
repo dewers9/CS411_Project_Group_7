@@ -20,16 +20,22 @@
 <input type="checkbox" id="diet10" name="diet_restriction" value="Low FODMAP"><label>Low FODMAP</label> </br>
 <input type="checkbox" id="diet11" name="diet_restriction" value="Whole30"><label>Whole30</label> </br>
 
-  <h2>Results</h2>
-  <ul id="results">
-  
-  <h2>History</h2>
-  <button onclick="show_history()">Show History</button>
-  <button onclick="clean_history()">Clean History</button>
-  <ul id="history">
+<h2>Search for Groceries by Zipcode</h2>
+  <input id="input" value="77494, tofu"></input>
+  <button onclick="searchIngredByZipCode(document.getElementById('input').value)">Search</button>
+<br>
 
-    
-  </ul>
+<h2>Results</h2>
+<ul id="results">
+</ul>
+
+
+<h2>History</h2>
+<button onclick="show_history()">Show History</button>
+<button onclick="clean_history()">Clean History</button>
+<ul id="history">
+
+</ul>
 </body>
 </html>
 <script src="main.js"></script>

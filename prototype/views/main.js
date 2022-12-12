@@ -118,3 +118,48 @@ function clean_history(){
   }
   localStorage.clear();
 }
+
+// implement API to search for groceries in zipcode
+const options2 = {
+  method: 'GET',
+  headers: {
+  'X-RapidAPI-Key': '137cf25511mshf015f826c73a940p1a4b43jsne674e3b1c38c',
+  'X-RapidAPI-Host': 'weee-grocery-api-sayweee-com-browsing-searching-details.p.rapidapi.com'
+  }
+  };
+  
+  function searchIngredByZipCode(input){
+  
+  input = input.split(",")
+  for(i in input){
+  input[i] = input[i].trim()
+  }
+  zipcode = input[0]
+  keyword = input[1]
+  
+  let url2 = 'https://weee-grocery-api-sayweee-com-browsing-searching-details.p.rapidapi.com/search?zipcode=' + zipcode + '&keyword=' + keyword + '&limit=60&offset=0'
+  console.log(url2)
+  
+  let y = get_promise2(url2)
+  set_results(y)
+  
+  console.log(y)
+  console.log(y.then((result) => set_results2(result)))
+  console.log(y.then((result) => console.log(result)))
+  }
+  
+  async function get_promise2(url2){
+  let y = await fetch(url2,options2).then(response => response.json())
+  return y
+  }
+  
+  function set_results2(new_val2){
+  let temp
+  let res = document.getElementById('results')
+  
+  for(i in new_val2){
+  temp = document.createElement("li")
+  temp.innerHTML = JSON.stringify(new_val2[i])
+  res.appendChild(temp)
+  }
+  }
